@@ -1,7 +1,8 @@
 from instr import *
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QTimer, QTime
 from PyQt5.QtWidgets import *
 from final_win import *
+
 
 class TestWin(QWidget):
     def __init__(self):
@@ -30,11 +31,11 @@ class TestWin(QWidget):
         self.text_hinttest3 = QLineEdit(txt_hinttest3)
         self.text_hinttest3 = QLineEdit(txt_hinttest3)
         self.text_results = QPushButton(txt_sendresults)
-        self.text_counter = QLabel('test')
+        self.text_timer = QLabel('')
         self.h_line = QHBoxLayout()
         self.r_line = QVBoxLayout()
         self.l_line = QVBoxLayout()
-        self.r_line.addWidget(self.text_counter, alignment=Qt.AlignCenter)
+        self.r_line.addWidget(self.text_timer, alignment=Qt.AlignCenter)
         self.l_line.addWidget(self.text_name, alignment=Qt.AlignLeft)
         self.l_line.addWidget(self.text_hintname, alignment=Qt.AlignLeft)
         self.l_line.addWidget(self.text_age, alignment=Qt.AlignLeft)
@@ -58,6 +59,22 @@ class TestWin(QWidget):
     def next_click(self):
         self.hide()
         self.fw = FinalWin()
+    def timer_test(self):
+        global time
+        time = QTime(0, 1, 0)
+        self.timer = QTimer()
+        self.timer.timeout.connect(self.timer1Event)
+        self.timer.start(1000)
+    def timer1Event(self):
+        global time
+        time = time.addSecs(-1)
+        self.text_timer.setText(time.toString("hh:mm:ss"))
+        self.text_timer.setFont(QFont("Times", 36, QFont.Bold))
+        self.text_timer.setStyleSheet("color: rgb(0, 0, 0)")
+        if time.toString("hh:mm:ss") == "00:00:00":
+            self.timer.stop()
+    def start_test1_connects(self):
+        self.start_test1.clicked.connect(self.timer_test)
 
         
 

@@ -1,4 +1,3 @@
-
 from instr import *
 from second_win import *
 from PyQt5.QtCore import Qt
