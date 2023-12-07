@@ -1,6 +1,7 @@
 from instr import *
 from PyQt5.QtCore import Qt, QTimer, QTime
 from PyQt5.QtWidgets import *
+from PyQt5.QtGui import *
 from final_win import *
 
 
@@ -11,10 +12,12 @@ class TestWin(QWidget):
         self.initUI()
         self.connects()
         self.show()
+
     def set_appear(self):
         self.setWindowTitle('Тест Руфье')
         self.resize(win_width, win_height)
         self.move(win_x, win_y)
+
     def initUI(self):
         self.text_name = QLabel(txt_name)
         self.text_hintname = QLineEdit(txt_hintname)
@@ -54,17 +57,22 @@ class TestWin(QWidget):
         self.h_line.addLayout(self.l_line)
         self.h_line.addLayout(self.r_line)
         self.setLayout(self.h_line)
+
     def connects(self):
         self.text_results.clicked.connect(self.next_click)
+        self.start_test1.clicked.connect(self.timer_test)
+
     def next_click(self):
         self.hide()
         self.fw = FinalWin()
+
     def timer_test(self):
         global time
         time = QTime(0, 1, 0)
         self.timer = QTimer()
         self.timer.timeout.connect(self.timer1Event)
         self.timer.start(1000)
+
     def timer1Event(self):
         global time
         time = time.addSecs(-1)
@@ -73,19 +81,3 @@ class TestWin(QWidget):
         self.text_timer.setStyleSheet("color: rgb(0, 0, 0)")
         if time.toString("hh:mm:ss") == "00:00:00":
             self.timer.stop()
-    def start_test1_connects(self):
-        self.start_test1.clicked.connect(self.timer_test)
-
-        
-
-
-
-
-
-
-
-
-
-
-
-

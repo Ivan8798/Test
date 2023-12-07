@@ -9,10 +9,12 @@ class FinalWin(QWidget):
         self.set_appear()
         self.initUI()
         self.show()
+
     def set_appear(self):
         self.setWindowTitle('Тест Руфье')
         self.resize(win_width, win_height)
         self.move(win_x, win_y)
+
     def initUI(self):
         self.text_index = QLabel(txt_index)
         self.text_workheart = QLabel(txt_workheart)
