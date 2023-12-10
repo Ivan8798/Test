@@ -4,8 +4,9 @@ from PyQt5.QtWidgets import *
 
 
 class FinalWin(QWidget):
-    def __init__(self):
+    def __init__(self, exp):
         super().__init__()
+        self.exp = exp
         self.set_appear()
         self.initUI()
         self.show()
@@ -22,3 +23,4 @@ class FinalWin(QWidget):
         self.v_line.addWidget(self.text_index, alignment=Qt.AlignCenter)
         self.v_line.addWidget(self.text_workheart, alignment=Qt.AlignCenter)
         self.setLayout(self.v_line)
+
